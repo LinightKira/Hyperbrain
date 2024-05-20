@@ -8,7 +8,7 @@ from app_server.db import db
 
 from app_server.routes.tableinfo import tableInfo_bp
 from config import Config
-from flask_jwt_extended import JWTManager
+
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
@@ -16,13 +16,13 @@ CORS(app, supports_credentials=True)
 app.config['SQLALCHEMY_DATABASE_URI'] = Config.MYSQL_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True  # 设置sqlalchemy自动更新跟踪数据库
 
-# JWT部分
-app.config['JWT_SECRET_KEY'] = Config.JWT_KEY
-# 配置JWT过期时间
-app.config['JWT_ACCESS_TOKEN_EXPIRES'] = Config.JWT_EXPIRE
-
-# 注册JWT
-jwt = JWTManager(app)
+# # JWT部分
+# app.config['JWT_SECRET_KEY'] = Config.JWT_KEY
+# # 配置JWT过期时间
+# app.config['JWT_ACCESS_TOKEN_EXPIRES'] = Config.JWT_EXPIRE
+#
+# # 注册JWT
+# jwt = JWTManager(app)
 
 # 注册路由
 app.register_blueprint(tableInfo_bp)

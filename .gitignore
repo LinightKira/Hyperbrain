@@ -11,6 +11,7 @@ fssl.key
 fssl.pem
 config.py
 
+__pycache__
 
 workspace
 migrations
