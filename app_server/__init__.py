@@ -7,6 +7,7 @@ from flask_cors import CORS
 from app_server.db import db
 
 from app_server.routes.tableinfo import tableInfo_bp
+from app_server.routes.useful_tools import tools_bp
 from config import Config
 
 
@@ -26,6 +27,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True  # 设置sqlalchemy自动更
 
 # 注册路由
 app.register_blueprint(tableInfo_bp)
+app.register_blueprint(tools_bp)
 
 
 # 连接数据库
