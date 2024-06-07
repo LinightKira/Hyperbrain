@@ -12,6 +12,7 @@ fssl.pem
 config.py
 
 __pycache__
+MetaGPT/
 
 workspace
 migrations

@@ -135,6 +135,8 @@ def get_table_columns2():
     try:
 
         table_names = parse_names_array(request_data)
+        # 数据清洗，过滤多余的引号
+        table_names = filter_quotes(table_names)
 
         print('table_names:', table_names, type(table_names))
 
