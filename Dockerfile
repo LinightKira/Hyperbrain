@@ -25,3 +25,4 @@ CMD ["python", "app.py"]
 
 # docker build -t hyperbrain .
 #docker run -v ${PWD}/config.py:/home/app/config.py -v ${PWD}/config2.yaml:/home/app/MetaGPT/config/config2.yaml -d -p 5000:5000 --name hyperbrain hyperbrain
+#docker run -v ${PWD}/config.py:/home/app/config.py  -d -p 5000:5000 --name hyperbrain hyperbrain
