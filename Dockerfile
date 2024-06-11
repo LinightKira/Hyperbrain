@@ -6,7 +6,7 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 COPY app_server app_server
 COPY app_agent app_agent
-COPY MetaGPT MetaGPT
+
 
 
 COPY migrations migrations
@@ -14,8 +14,9 @@ COPY config.py ./
 COPY app.py   ./
 #COPY fssl.key fssl.pem ./
 
-RUN cd MetaGPT && pip install --upgrade -e .
-RUN cd ..
+#COPY MetaGPT MetaGPT
+#RUN cd MetaGPT && pip install --upgrade -e .
+#RUN cd ..
 
 
 CMD ["flask","db","upgrade"]

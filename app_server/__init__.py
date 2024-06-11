@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 
 from app_server.db import db
-from app_server.routes.sql_execute import sql_bp
+# from app_server.routes.sql_execute import sql_bp
 
 from app_server.routes.tableinfo import tableInfo_bp
 from config import Config
@@ -27,7 +27,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True  # 设置sqlalchemy自动更
 
 # 注册路由
 app.register_blueprint(tableInfo_bp)
-app.register_blueprint(sql_bp)
+# app.register_blueprint(sql_bp)
 
 
 # 连接数据库
@@ -35,7 +35,7 @@ with app.app_context():
     # 初始化数据库
     db.init_app(app)
     # db.drop_all() #删除所有的表
-    db.create_all()  # 创建所有的表
+    # db.create_all()  # 创建所有的表
 
 migrate = Migrate(app, db)
 

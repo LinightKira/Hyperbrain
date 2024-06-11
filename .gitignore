@@ -10,6 +10,7 @@ lerna-debug.log*
 fssl.key
 fssl.pem
 config.py
+config2.yaml
 
 __pycache__
 MetaGPT/
