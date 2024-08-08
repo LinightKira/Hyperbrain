@@ -12,7 +12,7 @@ from sqlalchemy.exc import IntegrityError
 
 # Flask app and database configuration
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Freedom7@localhost/media_crawler'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:pwd@localhost/media_crawler'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 # Enable CORS
@@ -57,7 +57,7 @@ class XHSNoteCommentTag(db.Model):
 def call_coze_api(content):
     url = "https://api.coze.cn/open_api/v2/chat"
     headers = {
-        "Authorization": "Bearer pat_othSNTQYHZ0zaW2GDz4cHDiH2eHP3SpaMfAIznaK5pLMEYC5M711Ee4yafid8T3q",
+        "Authorization": "Bearer pat_**********************************",
         "Content-Type": "application/json",
         "Accept": "*/*",
         "Host": "api.coze.cn",
@@ -65,7 +65,7 @@ def call_coze_api(content):
     }
     payload = {
         "conversation_id": "",
-        "bot_id": "7400006860121784347",
+        "bot_id": "*******************",
         "user": "112233",
         "query": content,
         "stream": False
@@ -86,7 +86,7 @@ def call_dify_api(content):
     print('start dify api')
     url = "http://localhost/v1/completion-messages"
     headers = {
-        "Authorization": "Bearer app-fyz43l3tqa4vNIH9EBylhBs7",
+        "Authorization": "Bearer app-********************",
         "Content-Type": "application/json"
     }
     payload = {
