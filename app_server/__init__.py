@@ -8,6 +8,7 @@ from app_server.db import db
 # from app_server.routes.sql_execute import sql_bp
 
 from app_server.routes.tableinfo import tableInfo_bp
+from app_server.routes.xhs import xhs_bp
 from config import Config
 
 
@@ -28,6 +29,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True  # 设置sqlalchemy自动更
 # 注册路由
 app.register_blueprint(tableInfo_bp)
 # app.register_blueprint(sql_bp)
+app.register_blueprint(xhs_bp)
 
 
 # 连接数据库

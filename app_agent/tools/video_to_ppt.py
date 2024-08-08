@@ -1,7 +1,6 @@
 import os
-import shutil
 from pptx import Presentation
-from pptx.util import Inches
+from pptx.util import Inches, Pt
 from moviepy.editor import VideoFileClip
 from PIL import Image
 
@@ -30,7 +29,6 @@ def create_ppt_with_videos(folder_path, output_ppt_path):
     slide_width, slide_height = prs.slide_width, prs.slide_height
 
     for video_file in video_files:
-
         title = os.path.splitext(video_file)[0]
         # Add a slide
         slide_layout = prs.slide_layouts[5]  # Use a blank slide layout
@@ -51,16 +49,32 @@ def create_ppt_with_videos(folder_path, output_ppt_path):
         aspect_ratio = video_width / video_height
         ppt_aspect_ratio = slide_width / slide_height
 
-        if aspect_ratio > ppt_aspect_ratio:
-            video_display_width = slide_width
-            video_display_height = slide_width / aspect_ratio
-        else:
-            video_display_height = slide_height
-            video_display_width = slide_height * aspect_ratio
+        # Set title position and size
+        title_top = Inches(0.5)
+        title_left = Inches(0.5)
+        title_width = slide_width - Inches(1)
+        title_height = Inches(1)
 
-        # Center the video on the slide
+        # Set the title
+        title_shape = slide.shapes.title
+        if not title_shape:
+            title_shape = slide.shapes.add_textbox(title_left, title_top, title_width, title_height)
+        title_frame = title_shape.text_frame
+        title_frame.text = title
+        title_shape.text_frame.paragraphs[0].font.size = Pt(24)  # Adjust the font size as needed
+
+        # Calculate video position below the title with some margin
+        video_top_margin = title_top + title_height   # Reduced the top margin between title and video
+        if aspect_ratio > ppt_aspect_ratio:
+            video_display_width = slide_width - Inches(1)  # Add some margin on sides
+            video_display_height = (slide_width - Inches(1)) / aspect_ratio
+        else:
+            video_display_height = slide_height - video_top_margin - Inches(0.5)  # Reduced the bottom margin
+            video_display_width = (slide_height - video_top_margin - Inches(0.5)) * aspect_ratio
+
+        # Center the video horizontally and position it below the title
         left = (slide_width - video_display_width) / 2
-        top = (slide_height - video_display_height) / 2
+        top = video_top_margin
 
         slide.shapes.add_movie(
             video_path, left, top, video_display_width, video_display_height, poster_frame_image=first_frame_path
@@ -75,11 +89,6 @@ def create_ppt_with_videos(folder_path, output_ppt_path):
         if os.path.exists(first_frame_path):
             os.remove(first_frame_path)
 
-        # Set the title
-
-        title_shape = slide.shapes.title
-        if title_shape:
-            title_shape.text = title
     # Save the presentation
     prs.save(output_ppt_path)
 
